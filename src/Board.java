@@ -21,11 +21,11 @@ public class Board {
 		g2d.fillRect(0, 0, width, LINE_SIZE);
 		g2d.fillRect(0, height - LINE_SIZE, width, LINE_SIZE);
 		g2d.fillRect(0, 0, LINE_SIZE, height);
-		g2d.fillRect(width - LINE_SIZE, 0, 5, height);
+		g2d.fillRect(width - LINE_SIZE, 0, LINE_SIZE, height);
 		
 		g2d.fillRect(width / 4 - (LINE_SIZE / 2), 0, LINE_SIZE, height);
 		g2d.fillRect(width / 2 - (LINE_SIZE / 2), 0, LINE_SIZE, height);
-		g2d.fillRect((int)(width * .75) - (LINE_SIZE / 2), 0, 5, height);
+		g2d.fillRect((int)(width * .75) - (LINE_SIZE / 2), 0, LINE_SIZE, height);
 		
 		g2d.fillRect(0, height / 4 - (LINE_SIZE / 2), width, LINE_SIZE);
 		g2d.fillRect(0, height / 2 - (LINE_SIZE / 2), width, LINE_SIZE);
