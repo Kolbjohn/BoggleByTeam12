@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 
@@ -8,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -25,23 +27,35 @@ public class UI {
 		boardLabel.setBounds(200, 0, 700, 700);
 		
 		JLabel wordListLabel = new JLabel();
+		wordListLabel.setText("<html>according<br>to<br>all<br>known<br>laws<br>of<br>aviation<br>there<br>is<br>no<br>"
+				+ "way<br>a<br>bee<br>should<br>be<br>able<br>to<br>fly<br>its<br>"
+				+ "wings<br>are<br>too<br>small<br>to<br>get<br>its<br>fat<br>little<br>body<br>off<br>the<br>ground<br></html>");
 		wordListLabel.setOpaque(true);
 		wordListLabel.setBackground(Color.WHITE);
-		wordListLabel.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 0, Color.BLACK));
-		wordListLabel.setBounds(0, 0, 200, 700);
+		wordListLabel.setVerticalAlignment(JLabel.TOP);
+		wordListLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+		JScrollPane scrollPanel = new JScrollPane(wordListLabel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPanel.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 0, Color.BLACK));
+		scrollPanel.setBounds(0, 0, 200, 700);
 		
-		JLabel timerLabel = new JLabel();
+		JLabel timerLabel = new JLabel("3:00.00");
 		timerLabel.setOpaque(true);
 		timerLabel.setBackground(Color.WHITE);
 		timerLabel.setBorder(BorderFactory.createMatteBorder(0, 5, 5, 3, Color.BLACK));
+		timerLabel.setFont(new Font("Arial", Font.PLAIN, 50));
+		timerLabel.setForeground(Color.BLUE);
+		timerLabel.setHorizontalAlignment(JLabel.CENTER);
 		
-		JLabel scoreLabel = new JLabel();
+		JLabel scoreLabel = new JLabel("<html>Score: 68<br><br><u>Latest Word</u><br>belt</html>");
+		scoreLabel.setHorizontalAlignment(JLabel.CENTER);
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.WHITE);
 		scoreLabel.setBorder(BorderFactory.createMatteBorder(0, 2, 5, 5, Color.BLACK));
 		
-		JButton button = new JButton();
+		JButton button = new JButton("Submit");
 		button.setFocusable(false);
+		button.setFont(new Font("Arial", Font.PLAIN, 50));
+		button.setForeground(Color.BLUE);
 		
 		JPanel bottom = new JPanel(new GridLayout(1, 3, 0, 0));
 		bottom.add(timerLabel);
@@ -49,7 +63,7 @@ public class UI {
 		bottom.add(button);
 		bottom.setBounds(0, 700, 900, 200);
 		
-		frame.getContentPane().add(wordListLabel);
+		frame.getContentPane().add(scrollPanel);
 		frame.getContentPane().add(boardLabel);
 		frame.getContentPane().add(bottom);
 		
