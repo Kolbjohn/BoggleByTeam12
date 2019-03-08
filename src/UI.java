@@ -20,11 +20,7 @@ public class UI {
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
 		
-		Board board = new Board();
-		BufferedImage boardImage = board.getImage();
-		
-		JLabel boardLabel = new JLabel(new ImageIcon(boardImage));
-		boardLabel.setBounds(200, 0, 700, 700);
+		Board board = new Board(frame);
 		
 		JLabel wordListLabel = new JLabel();
 		wordListLabel.setText("<html>according<br>to<br>all<br>known<br>laws<br>of<br>aviation<br>there<br>is<br>no<br>"
@@ -64,7 +60,6 @@ public class UI {
 		bottom.setBounds(0, 700, 900, 200);
 		
 		frame.getContentPane().add(scrollPanel);
-		frame.getContentPane().add(boardLabel);
 		frame.getContentPane().add(bottom);
 		
 		frame.setSize(906, 935);
