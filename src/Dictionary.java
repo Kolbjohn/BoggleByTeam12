@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Dictionary {
     // Global arraylist to store all the words
-    private static ArrayList<String> words = new ArrayList<>();
+    private static ArrayList<String> wordsInDictionary = new ArrayList<>();
 
     // Reads the external dictionary text file and stores them in words list
     public static void generateDictionary(){
@@ -30,13 +30,17 @@ public class Dictionary {
             BufferedReader br = new BufferedReader(new FileReader(dictionaryFile));
             String currentLine;
             while((currentLine = br.readLine()) != null){
-               words.add(currentLine.trim());
+                wordsInDictionary.add(currentLine.trim());
             }
             br.close();
         }
-        catch(Exception e1){
-            e1.printStackTrace();
+        catch(Exception e){
+            e.printStackTrace();
         }
-        System.out.println(words.size());
+    }
+
+    // Checks if the given word is present in the dictionary
+    public static boolean checkWord(String word){
+        return wordsInDictionary.contains(word.toUpperCase());
     }
 }
