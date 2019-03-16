@@ -1,10 +1,17 @@
+/*
+ * This singleton class contains all the hardcoded die letters for each die
+ * Also contains a method to randomize the dice
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Die {
+    // Initialization of global variables for dice and Die class instance
     private static final Map<Integer,String[]> diceMap = new HashMap<>();
     private static Die instance = null;
 
+    // Default constructor that puts all the hardcoded dice in the map
     private Die(){
         diceMap.put(0, new String[] {"R", "I", "F", "O", "B", "X"});
         diceMap.put(1, new String[] {"H", "M", "S", "R", "A", "O"});
@@ -27,11 +34,11 @@ public class Die {
         diceMap.put(15, new String[] {"P", "A", "C", "E", "M", "D"});
     }
 
+    // Provides a current instance of the Die class when called
     public static Die getInstance(){
         if(instance == null){
             instance = new Die();
         }
         return instance;
     }
-
 }
