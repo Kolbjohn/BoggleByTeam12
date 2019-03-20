@@ -34,14 +34,6 @@ public class UI {
 		scrollPanel.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 0, Color.BLACK));
 		scrollPanel.setBounds(0, 0, 200, 700);
 		
-		JLabel timerLabel = new JLabel("3:00.00");
-		timerLabel.setOpaque(true);
-		timerLabel.setBackground(Color.WHITE);
-		timerLabel.setBorder(BorderFactory.createMatteBorder(0, 5, 5, 3, Color.BLACK));
-		timerLabel.setFont(new Font("Arial", Font.PLAIN, 50));
-		timerLabel.setForeground(Color.BLUE);
-		timerLabel.setHorizontalAlignment(JLabel.CENTER);
-		
 		JLabel scoreLabel = new JLabel("<html>Score: 68<br><br><u>Latest Word</u><br>belt</html>");
 		scoreLabel.setHorizontalAlignment(JLabel.CENTER);
 		scoreLabel.setOpaque(true);
@@ -54,7 +46,7 @@ public class UI {
 		button.setForeground(Color.BLUE);
 		
 		JPanel bottom = new JPanel(new GridLayout(1, 3, 0, 0));
-		bottom.add(timerLabel);
+		bottom.add(new GameTimer(180));
 		bottom.add(scoreLabel);
 		bottom.add(button);
 		bottom.setBounds(0, 700, 900, 200);
