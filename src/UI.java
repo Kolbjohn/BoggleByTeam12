@@ -1,10 +1,10 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.image.BufferedImage;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +21,7 @@ public class UI {
 		frame.getContentPane().setLayout(null);
 		
 		Board board = new Board(frame);
+		GameTimer timer = new GameTimer(180);
 		
 		JLabel wordListLabel = new JLabel();
 		wordListLabel.setText("<html>according<br>to<br>all<br>known<br>laws<br>of<br>aviation<br>there<br>is<br>no<br>"
@@ -40,13 +41,21 @@ public class UI {
 		scoreLabel.setBackground(Color.WHITE);
 		scoreLabel.setBorder(BorderFactory.createMatteBorder(0, 2, 5, 5, Color.BLACK));
 		
-		JButton button = new JButton("Submit");
+		JButton button = new JButton("Start");
 		button.setFocusable(false);
 		button.setFont(new Font("Arial", Font.PLAIN, 50));
 		button.setForeground(Color.BLUE);
+		button.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 5, Color.BLACK));
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				timer.startTimer();
+				button.setText("Submit");
+			}
+		});
 		
 		JPanel bottom = new JPanel(new GridLayout(1, 3, 0, 0));
-		bottom.add(new GameTimer(180));
+		bottom.add(timer);
 		bottom.add(scoreLabel);
 		bottom.add(button);
 		bottom.setBounds(0, 700, 900, 200);

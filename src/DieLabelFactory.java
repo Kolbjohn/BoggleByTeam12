@@ -24,14 +24,22 @@ public class DieLabelFactory {
 			public void mouseClicked(MouseEvent e) {}
 			
 			@Override
-			public void mouseEntered(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {
+				if (label.getBackground() == Color.WHITE) {
+					label.setBackground(Color.LIGHT_GRAY);
+				}
+			}
 			
 			@Override
-			public void mouseExited(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {
+				if (label.getBackground() == Color.LIGHT_GRAY) {
+					label.setBackground(Color.WHITE);
+				}
+			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (label.getBackground() == Color.WHITE)
+				if (label.getBackground() != Color.GREEN)
 					label.setBackground(Color.GREEN);
 				else
 					label.setBackground(Color.WHITE);
