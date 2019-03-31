@@ -1,9 +1,12 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class Game {
-	private Board board;
+	private static Board board; //currently static for testing
 	private Dictionary dictionary;
 	private int score;
 	private GameTimer timer;
@@ -18,8 +21,9 @@ public class Game {
 		
 	}
 	
-	private void animate() {
-		
+	//should be private
+	public void animate() {
+		board.randomize();
 	}
 	
 	private String getFormattedList() {
@@ -38,6 +42,11 @@ public class Game {
 	
 	public void submitWord(String word) {
 		
+	}
+	
+	//test function
+	public static void clearHighlights() {
+		board.clearHighlights();
 	}
 	
 }

@@ -20,8 +20,8 @@ public class UI {
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
 		
-		Board board = new Board(frame);
-		GameTimer timer = new GameTimer(180);
+		Game game = new Game(frame);
+		GameTimer timer = new GameTimer(5);
 		
 		JLabel wordListLabel = new JLabel();
 		wordListLabel.setText("<html>according<br>to<br>all<br>known<br>laws<br>of<br>aviation<br>there<br>is<br>no<br>"
@@ -34,6 +34,7 @@ public class UI {
 		JScrollPane scrollPanel = new JScrollPane(wordListLabel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPanel.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 0, Color.BLACK));
 		scrollPanel.setBounds(0, 0, 200, 700);
+		scrollPanel.getVerticalScrollBar().setUnitIncrement(40);
 		
 		JLabel scoreLabel = new JLabel("<html>Score: 68<br><br><u>Latest Word</u><br>belt</html>");
 		scoreLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -49,8 +50,13 @@ public class UI {
 		button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				timer.startTimer();
-				button.setText("Submit");
+				if (timer.isRunning()) {
+					game.clearHighlights();
+				} else {
+					game.animate();
+					button.setText("Submit");
+					timer.startTimer();
+				}
 			}
 		});
 		

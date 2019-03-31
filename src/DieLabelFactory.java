@@ -8,7 +8,8 @@ import javax.swing.JLabel;
 
 public class DieLabelFactory {
 	
-	private static Font font = new Font("Arial", Font.PLAIN, 150);
+	public static final Font font = new Font("Arial", Font.PLAIN, 150);
+	public static final Font quFont = new Font("Arial", Font.PLAIN, 120);
 
 	public static JLabel createDieLabel(int die) {
 		JLabel label = new JLabel();
@@ -25,24 +26,22 @@ public class DieLabelFactory {
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (label.getBackground() == Color.WHITE) {
+				if (GameTimer.isRunning() && label.getBackground() == Color.WHITE) {
 					label.setBackground(Color.LIGHT_GRAY);
 				}
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (label.getBackground() == Color.LIGHT_GRAY) {
+				if (GameTimer.isRunning() && label.getBackground() == Color.LIGHT_GRAY) {
 					label.setBackground(Color.WHITE);
 				}
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if (label.getBackground() != Color.GREEN)
+				if (GameTimer.isRunning() && label.getBackground() != Color.GREEN)
 					label.setBackground(Color.GREEN);
-				else
-					label.setBackground(Color.WHITE);
 			}
 			
 			@Override
@@ -129,8 +128,7 @@ public class DieLabelFactory {
 		case 15:
 			label.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 5, Color.BLACK));
 			label.setBounds(725, 525, 175, 175);
-			label.setFont(new Font("Arial", Font.PLAIN, 125));
-			label.setText("Qu");
+			label.setText("!");
 			break;
 		}
 		

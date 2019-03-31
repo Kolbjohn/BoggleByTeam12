@@ -10,7 +10,7 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class GameTimer extends JLabel implements ActionListener{
 	
-	private Timer timer;
+	private static Timer timer;
 	private int timeRemaining;
 	
 	public GameTimer(int timeRemaining) {
@@ -39,6 +39,8 @@ public class GameTimer extends JLabel implements ActionListener{
 		if (timeRemaining == 0) {
 			this.setText("<html>GAME<br>OVER</html>");
 			this.setForeground(Color.RED);
+			timer.stop();
+			Game.clearHighlights();
 		} else {
 			timeRemaining--;
 			if (timeRemaining - ((timeRemaining/60) * 60) < 10) {
@@ -51,6 +53,10 @@ public class GameTimer extends JLabel implements ActionListener{
 	
 	public void startTimer() {
 		timer.start();
+	}
+	
+	public static boolean isRunning() {
+		return timer.isRunning();
 	}
 
 }
