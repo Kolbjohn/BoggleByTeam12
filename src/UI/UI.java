@@ -26,12 +26,10 @@ public class UI {
 		frame.getContentPane().setLayout(null);
 		
 		Game game = new Game(frame);
-		GameTimer timer = new GameTimer(30);
+		GameTimer timer = new GameTimer(180);
 		
 		JLabel wordListLabel = new JLabel();
-		wordListLabel.setText("<html>according<br>to<br>all<br>known<br>laws<br>of<br>aviation<br>there<br>is<br>no<br>"
-				+ "way<br>a<br>bee<br>should<br>be<br>able<br>to<br>fly<br>its<br>"
-				+ "wings<br>are<br>too<br>small<br>to<br>get<br>its<br>fat<br>little<br>body<br>off<br>the<br>ground<br></html>");
+		wordListLabel.setText("");
 		wordListLabel.setOpaque(true);
 		wordListLabel.setBackground(Color.WHITE);
 		wordListLabel.setVerticalAlignment(JLabel.TOP);
@@ -40,13 +38,15 @@ public class UI {
 		scrollPanel.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 0, Color.BLACK));
 		scrollPanel.setBounds(0, 0, 200, 700);
 		scrollPanel.getVerticalScrollBar().setUnitIncrement(40);
-		
-		JLabel scoreLabel = new JLabel("<html>Score: 68<br><br><u>Latest Word</u><br>belt</html>");
-		scoreLabel.setHorizontalAlignment(JLabel.CENTER);
+
+		JLabel scoreLabel = new JLabel("<html><center>Score: 0<br><u>Latest Word</u><br>-</center></html>");
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.WHITE);
+		scoreLabel.setFont(new Font("Arial", Font.PLAIN, 50));
+		scoreLabel.setForeground(Color.BLUE);
+		scoreLabel.setHorizontalAlignment(JLabel.CENTER);
 		scoreLabel.setBorder(BorderFactory.createMatteBorder(0, 2, 5, 5, Color.BLACK));
-		
+
 		JButton button = new JButton("Start");
 		button.setFocusable(false);
 		button.setFont(new Font("Arial", Font.PLAIN, 50));
@@ -57,6 +57,9 @@ public class UI {
 			public void actionPerformed(ActionEvent event) {
 				if (timer.isRunning()) {
 					game.clearHighlights();
+					game.submitWord();
+					scoreLabel.setText("<html><center>Score: "+game.getScore()+"<br><u>Latest Word</u><br>"+game.getLatestWord()+"</center></html>");
+					wordListLabel.setText(game.getFormattedList());
 				} else {
 					game.animate();
 					button.setText("Submit");
