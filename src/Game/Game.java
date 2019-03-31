@@ -18,6 +18,8 @@ public class Game {
 	
 	public Game(JFrame frame) {
 		board = new Board(frame);
+		dictionary = new Dictionary();
+		score = 0;
 		currentWord = "";
 		Dictionary.generateDictionary();
 	}
@@ -35,14 +37,15 @@ public class Game {
 	public void animate() {
 		board.randomize();
 	}
-	
-	private String getFormattedList() {
+
+	public String getFormattedList() {
 		StringBuilder formattedList = new StringBuilder("<html>");
-		for (int i = 0; i < wordList.size() - 1; i++) {
-			formattedList.append(wordList.get(i) + "<br>");
+		if(wordList.size() >= 1) {
+			for (int i = 0; i < wordList.size() - 1; i++) {
+				formattedList.append(wordList.get(i) + "<br>");
+			}
+			formattedList.append(wordList.get(wordList.size() - 1) + "</html>");
 		}
-		formattedList.append(wordList.get(wordList.size() - 1) + "</html>");
-		
 		return formattedList.toString();
 	}
 
@@ -51,12 +54,47 @@ public class Game {
 	}
 	
 	public void submitWord() {
-		
+		if(!wordList.contains(currentWord)) {
+			int length = currentWord.length();
+			if (length >= 3) {
+				if (this.dictionary.checkWord(currentWord)) {
+					switch (length) {
+						case 3:
+							score += 1;
+							break;
+						case 4:
+							score += 1;
+							break;
+						case 5:
+							score += 2;
+							break;
+						case 6:
+							score += 3;
+							break;
+						case 7:
+							score += 5;
+							break;
+						default:
+							score += 11;
+							break;
+					}
+					this.wordList.add(currentWord);
+				}
+			}
+		}
+		currentWord = "";
 	}
 	
 	//test function
 	public static void clearHighlights() {
 		board.clearHighlights();
 	}
-	
+
+	public int getScore() {
+		return this.score;
+	}
+
+	public String getLatestWord(){
+		return wordList.size() < 1 ? "-" : wordList.get(wordList.size()-1);
+	}
 }
