@@ -13,15 +13,22 @@ public class Game {
 	private Dictionary dictionary;
 	private int score;
 	private GameTimer timer;
-	private String currentWord;
+	private static String currentWord;
 	private ArrayList<String> wordList;
 	
 	public Game(JFrame frame) {
 		board = new Board(frame);
+		
+		currentWord = "";
 	}
 	
-	public static void addLetter(String letter) {
+	public static void addLetter(int position, String letter) {
+		currentWord += letter.toLowerCase();
 		
+		if (!board.isValid(position / 4, position % 4)) {
+			board.clearHighlights();
+			currentWord = "";
+		}
 	}
 	
 	//should be private
@@ -43,7 +50,7 @@ public class Game {
 		
 	}
 	
-	public void submitWord(String word) {
+	public void submitWord() {
 		
 	}
 	

@@ -1,5 +1,6 @@
 package Data;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,13 +10,14 @@ import javax.swing.JLabel;
 public class Board {
 	
 	private ArrayList<Die> dice;
-	private JLabel[] dieLabels;
+	private DieLabel[] dieLabels;
+	private int[][] letterOrder;
 	
 	public Board(JFrame frame) {
-		dieLabels = new JLabel[16];
+		dieLabels = new DieLabel[16];
 		
 		for (int i = 0; i < dieLabels.length; i++) {
-			dieLabels[i] = DieLabelFactory.createDieLabel(i);
+			dieLabels[i] = new DieLabel(i);
 			frame.getContentPane().add(dieLabels[i]);
 		}
 		
@@ -37,6 +39,13 @@ public class Board {
 		dice.add(new Die(new String[] {"Y", "L", "G", "K", "U", "E"}));
 		dice.add(new Die(new String[] {"B", "A", "L", "I", "Y", "T"}));
 		dice.add(new Die(new String[] {"P", "A", "C", "E", "M", "D"}));
+		
+		letterOrder = new int[4][4];
+		for (int i = 0; i < letterOrder.length; i++) {
+			for (int j = 0; j < letterOrder[i].length; j++) {
+				letterOrder[i][j] = 0;
+			}
+		}
 	}
 	
 	public void randomize() {
@@ -57,5 +66,59 @@ public class Board {
 		for (JLabel dieLabel : dieLabels) {
 			dieLabel.setBackground(Color.WHITE);
 		}
+		
+		for (int i = 0; i < letterOrder.length; i++) {
+			for (int j = 0; j < letterOrder[i].length; j++) {
+				letterOrder[i][j] = 0;
+			}
+		}
 	}
-}
+	
+	public boolean isValid(int x, int y) {
+		int currentLetter = getMax() + 1;
+		letterOrder[x][y] = currentLetter;
+		
+		if (currentLetter == 1) {
+			return true;
+		}
+		
+		int[] prevIndices = getIndices(currentLetter - 1);
+		if (Math.abs(x - prevIndices[0]) > 1 || Math.abs(y - prevIndices[1]) > 1) {
+			return false;
+		}
+		
+		//if move is diagonal
+		if (Math.abs(x - prevIndices[0]) == 1 && Math.abs(y - prevIndices[1]) == 1) {
+			if (letterOrder[x][prevIndices[1]] != 0 && letterOrder[prevIndices[0]][y] != 0) {
+				return false;
+			}
+		}
+	
+		return true;
+	}
+	
+	private int getMax() {
+		int max = 0;
+		
+		for (int i = 0; i < letterOrder.length; i++) {
+			for (int j = 0; j < letterOrder[i].length; j++) {
+				if (letterOrder[i][j] > max)
+					max = letterOrder[i][j];
+			}
+		}
+		
+		return max;
+	}
+	
+	private int[] getIndices(int letter) {
+		for (int i = 0; i < letterOrder.length; i++) {
+			for (int j = 0; j < letterOrder[i].length; j++) {
+				if (letterOrder[i][j] == letter) {
+					return new int[] {i, j};
+				}
+			}
+		}
+		
+		return null;
+	}
+ }
