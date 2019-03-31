@@ -32,6 +32,19 @@ public class Dictionary {
 
     // Checks if the given word is present in the dictionary
     public static boolean checkWord(String word){
-        return wordsInDictionary.contains(word.toUpperCase());
+        int low = 0, mid, high = wordsInDictionary.size() - 1;
+        while(low <= high){
+            mid = (low + high)/2;
+            if(wordsInDictionary.get(mid).compareTo(word.toUpperCase()) < 0){
+                low = mid + 1;
+            }
+            else if(wordsInDictionary.get(mid).compareTo(word.toUpperCase()) > 0){
+                high = mid - 1;
+            }
+            else{
+                return true;
+            }
+        }
+        return false;
     }
 }
