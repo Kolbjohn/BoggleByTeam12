@@ -1,3 +1,4 @@
+package UI;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -14,6 +15,9 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import Data.GameTimer;
+import Game.Game;
+
 public class UI {
 	
 	public UI() {
@@ -21,7 +25,7 @@ public class UI {
 		frame.getContentPane().setLayout(null);
 		
 		Game game = new Game(frame);
-		GameTimer timer = new GameTimer(5);
+		GameTimer timer = new GameTimer(30);
 		
 		JLabel wordListLabel = new JLabel();
 		wordListLabel.setText("<html>according<br>to<br>all<br>known<br>laws<br>of<br>aviation<br>there<br>is<br>no<br>"

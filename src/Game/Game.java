@@ -1,9 +1,12 @@
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package Game;
+
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.Timer;
+
+import Data.Board;
+import Data.Dictionary;
+import Data.GameTimer;
 
 public class Game {
 	private static Board board; //currently static for testing

@@ -1,3 +1,4 @@
+package Data;
 /*
  * This class reads the words from an external dictionary text file and stores them locally
  * Also checks if a given word is a valid word

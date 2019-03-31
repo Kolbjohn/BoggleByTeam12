@@ -1,3 +1,4 @@
+package Data;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -6,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+
+import Game.Game;
 
 @SuppressWarnings("serial")
 public class GameTimer extends JLabel implements ActionListener{
