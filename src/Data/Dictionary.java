@@ -13,8 +13,12 @@ public class Dictionary {
     // Global arraylist to store all the words
     private static ArrayList<String> wordsInDictionary = new ArrayList<>();
 
+    public Dictionary(){
+        generateDictionary();
+    }
+
     // Reads the external dictionary text file and stores them in words list
-    public static void generateDictionary(){
+    private void generateDictionary(){
         InputStream in = Dictionary.class.getResourceAsStream("dictionary.txt");
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -27,11 +31,10 @@ public class Dictionary {
         catch(Exception e){
             e.printStackTrace();
         }
-        System.out.println(wordsInDictionary.size());
     }
 
     // Checks if the given word is present in the dictionary
-    public static boolean checkWord(String word){
+    public boolean checkWord(String word){
         int low = 0, mid, high = wordsInDictionary.size() - 1;
         while(low <= high){
             mid = (low + high)/2;
