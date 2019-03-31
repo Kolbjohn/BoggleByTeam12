@@ -18,8 +18,8 @@ public class Game {
 	
 	public Game(JFrame frame) {
 		board = new Board(frame);
-		
 		currentWord = "";
+		Dictionary.generateDictionary();
 	}
 	
 	public static void addLetter(int position, String letter) {
