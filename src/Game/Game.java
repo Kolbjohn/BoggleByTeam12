@@ -15,24 +15,24 @@ public class Game {
 	private GameTimer timer;
 	private static String currentWord;
 	private ArrayList<String> wordList;
-	
+
 	public Game(JFrame frame) {
 		board = new Board(frame);
 		dictionary = new Dictionary();
 		score = 0;
 		currentWord = "";
-		Dictionary.generateDictionary();
+		wordList = new ArrayList<>();
 	}
-	
+
 	public static void addLetter(int position, String letter) {
 		currentWord += letter.toLowerCase();
-		
+
 		if (!board.isValid(position / 4, position % 4)) {
 			board.clearHighlights();
 			currentWord = "";
 		}
 	}
-	
+
 	//should be private
 	public void animate() {
 		board.randomize();
@@ -50,9 +50,9 @@ public class Game {
 	}
 
 	public static void startGame() {
-		
+
 	}
-	
+
 	public void submitWord() {
 		if(!wordList.contains(currentWord)) {
 			int length = currentWord.length();
