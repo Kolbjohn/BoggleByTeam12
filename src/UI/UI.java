@@ -15,6 +15,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import Data.Dictionary;
 import Data.GameTimer;
 import Game.Game;
 
@@ -85,7 +86,6 @@ public class UI {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {}
-    	
     	SwingUtilities.invokeLater(new Runnable() {
             public void run() {
             	new UI();

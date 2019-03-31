@@ -4,9 +4,7 @@ package Data;
  * Also checks if a given word is a valid word
  */
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -17,18 +15,9 @@ public class Dictionary {
 
     // Reads the external dictionary text file and stores them in words list
     public static void generateDictionary(){
-        Path workingDir = Paths.get(System.getProperty("user.dir"));
-        File dictDir = new File(workingDir.resolve("dictionary").toUri());
-        if(!dictDir.exists()){
-            System.out.println("No directory called " + dictDir.getName() + " is present.");
-            return;
-        }
-        File dictionaryFile = new File(dictDir, "dictionary.txt");
-        if(!dictionaryFile.exists()){
-            System.out.println("No file called " + dictionaryFile.getName() + " is present.");
-        }
+        InputStream in = Dictionary.class.getResourceAsStream("dictionary.txt");
         try{
-            BufferedReader br = new BufferedReader(new FileReader(dictionaryFile));
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String currentLine;
             while((currentLine = br.readLine()) != null){
                 wordsInDictionary.add(currentLine.trim());
@@ -38,6 +27,7 @@ public class Dictionary {
         catch(Exception e){
             e.printStackTrace();
         }
+        System.out.println(wordsInDictionary.size());
     }
 
     // Checks if the given word is present in the dictionary
