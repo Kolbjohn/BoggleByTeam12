@@ -1,12 +1,11 @@
-package Data;
 /*
  * This class reads the words from an external dictionary text file and stores them locally
  * Also checks if a given word is a valid word
  */
 
+package Data;
+
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class Dictionary {

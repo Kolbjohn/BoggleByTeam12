@@ -3,16 +3,15 @@ package Game;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import Data.Board;
 import Data.Dictionary;
-import Data.GameTimer;
 
 public class Game {
-	private static Board board; //currently static for testing
+	private static Board board;
 	private Dictionary dictionary;
-	private int score;
-	private GameTimer timer;
+	private static int score;
 	private static String currentWord;
 	private ArrayList<String> wordList;
 
@@ -33,8 +32,7 @@ public class Game {
 		}
 	}
 
-	//should be private
-	public void animate() {
+	private void animate() {
 		board.randomize();
 	}
 
@@ -49,8 +47,16 @@ public class Game {
 		return formattedList.toString();
 	}
 
-	public static void startGame() {
-
+	public static void endGame() {
+		board.clearHighlights();
+		JOptionPane.showMessageDialog(null, "Game Over! Your score: " + score, "Game Over", JOptionPane.PLAIN_MESSAGE);
+	}
+	
+	public void startGame() {
+		animate();
+		score = 0;
+		wordList.clear();
+		currentWord = "";
 	}
 
 	public void submitWord() {
@@ -83,15 +89,11 @@ public class Game {
 			}
 		}
 		currentWord = "";
-	}
-	
-	//test function
-	public static void clearHighlights() {
 		board.clearHighlights();
 	}
 
 	public int getScore() {
-		return this.score;
+		return Game.score;
 	}
 
 	public String getLatestWord(){

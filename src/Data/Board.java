@@ -1,6 +1,6 @@
 package Data;
+
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
 

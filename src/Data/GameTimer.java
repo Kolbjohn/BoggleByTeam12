@@ -1,4 +1,5 @@
 package Data;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -14,9 +15,11 @@ import Game.Game;
 public class GameTimer extends JLabel implements ActionListener{
 	
 	private static Timer timer;
+	private final int maxTime;
 	private int timeRemaining;
 	
 	public GameTimer(int timeRemaining) {
+		this.maxTime = timeRemaining;
 		this.timeRemaining = timeRemaining;
 		this.setOpaque(true);
 		this.setBackground(Color.WHITE);
@@ -40,10 +43,12 @@ public class GameTimer extends JLabel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (timeRemaining == 0) {
-			this.setText("<html>GAME<br>OVER</html>");
-			this.setForeground(Color.RED);
 			timer.stop();
-			Game.clearHighlights();
+			timer = new Timer(1000, this);
+			timer.setInitialDelay(0);
+			this.timeRemaining = this.maxTime;
+			
+			Game.endGame();
 		} else {
 			timeRemaining--;
 			if (timeRemaining - ((timeRemaining/60) * 60) < 10) {

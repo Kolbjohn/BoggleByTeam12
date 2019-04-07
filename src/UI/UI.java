@@ -1,4 +1,5 @@
 package UI;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -15,7 +16,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-import Data.Dictionary;
 import Data.GameTimer;
 import Game.Game;
 
@@ -26,8 +26,9 @@ public class UI {
 		frame.getContentPane().setLayout(null);
 		
 		Game game = new Game(frame);
-		GameTimer timer = new GameTimer(180);
+		GameTimer timer = new GameTimer(20);
 		
+		//creating scrolling label
 		JLabel wordListLabel = new JLabel();
 		wordListLabel.setText("");
 		wordListLabel.setOpaque(true);
@@ -39,6 +40,7 @@ public class UI {
 		scrollPanel.setBounds(0, 0, 200, 700);
 		scrollPanel.getVerticalScrollBar().setUnitIncrement(40);
 
+		//creating score label
 		JLabel scoreLabel = new JLabel("<html><center>Score: 0<br><u>Latest Word</u><br>-</center></html>");
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.WHITE);
@@ -47,6 +49,7 @@ public class UI {
 		scoreLabel.setHorizontalAlignment(JLabel.CENTER);
 		scoreLabel.setBorder(BorderFactory.createMatteBorder(0, 2, 5, 5, Color.BLACK));
 
+		//creating button
 		JButton button = new JButton("Start");
 		button.setFocusable(false);
 		button.setFont(new Font("Arial", Font.PLAIN, 50));
@@ -54,29 +57,32 @@ public class UI {
 		button.setBorder(BorderFactory.createMatteBorder(0, 0, 5, 5, Color.BLACK));
 		button.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent event) {
-				if (timer.isRunning()) {
-					game.clearHighlights();
+			public void actionPerformed(ActionEvent event) { //button functionality	
+				if (GameTimer.isRunning()) {
 					game.submitWord();
-					scoreLabel.setText("<html><center>Score: "+game.getScore()+"<br><u>Latest Word</u><br>"+game.getLatestWord()+"</center></html>");
-					wordListLabel.setText(game.getFormattedList());
 				} else {
-					game.animate();
+					game.startGame();
 					button.setText("Submit");
 					timer.startTimer();
 				}
+				
+				scoreLabel.setText("<html><center>Score: "+game.getScore()+"<br><u>Latest Word</u><br>"+game.getLatestWord()+"</center></html>");
+				wordListLabel.setText(game.getFormattedList());
 			}
 		});
 		
+		//creating bottom panel to hold bottom 3 UI elements
 		JPanel bottom = new JPanel(new GridLayout(1, 3, 0, 0));
 		bottom.add(timer);
 		bottom.add(scoreLabel);
 		bottom.add(button);
 		bottom.setBounds(0, 700, 900, 200);
 		
+		//adding elements to frame
 		frame.getContentPane().add(scrollPanel);
 		frame.getContentPane().add(bottom);
 		
+		//changing properties of frame
 		frame.setSize(906, 935);
 		frame.setLocationRelativeTo(null);
 		frame.setTitle("Boggle by Team 12");
@@ -95,5 +101,4 @@ public class UI {
             }
         });
 	}
-
 }
