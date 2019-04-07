@@ -26,7 +26,7 @@ public class UI {
 		frame.getContentPane().setLayout(null);
 		
 		Game game = new Game(frame);
-		GameTimer timer = new GameTimer(20);
+		GameTimer timer = new GameTimer(180);
 		
 		//creating scrolling label
 		JLabel wordListLabel = new JLabel();
