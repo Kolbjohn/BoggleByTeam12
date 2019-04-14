@@ -2,7 +2,6 @@ package test;
 
 import Data.Dictionary;
 import Game.Game;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
