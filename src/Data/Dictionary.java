@@ -5,20 +5,25 @@
 
 package Data;
 
+import UI.UI;
+
 import java.io.*;
+import java.text.Collator;
 import java.util.ArrayList;
 
 public class Dictionary {
     // Global arraylist to store all the words
     private static ArrayList<String> wordsInDictionary = new ArrayList<>();
+    final Collator instance = Collator.getInstance();
 
     public Dictionary(){
         generateDictionary();
+        instance.setStrength(Collator.SECONDARY);
     }
 
     // Reads the external dictionary text file and stores them in words list
     private void generateDictionary(){
-        InputStream in = Dictionary.class.getResourceAsStream("dictionary.txt");
+        InputStream in = UI.isEnglish ? Dictionary.class.getResourceAsStream("dictionary_en.txt") : Dictionary.class.getResourceAsStream("dictionary_de");
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String currentLine;
@@ -37,10 +42,10 @@ public class Dictionary {
         int low = 0, mid, high = wordsInDictionary.size() - 1;
         while(low <= high){
             mid = (low + high)/2;
-            if(wordsInDictionary.get(mid).compareTo(word.toUpperCase()) < 0){
+            if(instance.compare(wordsInDictionary.get(mid), word.toUpperCase()) < 0){
                 low = mid + 1;
             }
-            else if(wordsInDictionary.get(mid).compareTo(word.toUpperCase()) > 0){
+            else if(instance.compare(wordsInDictionary.get(mid), word.toUpperCase()) > 0){
                 high = mid - 1;
             }
             else{
