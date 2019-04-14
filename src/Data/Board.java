@@ -54,9 +54,9 @@ public class Board {
 		for (int i = 0; i < dieLabels.length; i++) {
 			String text = dice.get(i).randomize();
 			if (text.equals("Qu")) {
-				dieLabels[i].setFont(DieLabelFactory.quFont);
+				dieLabels[i].setFont(DieLabel.quFont);
 			} else {
-				dieLabels[i].setFont(DieLabelFactory.font);
+				dieLabels[i].setFont(DieLabel.font);
 			}
 			dieLabels[i].setText(text);
 		}

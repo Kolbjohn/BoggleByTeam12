@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
@@ -21,9 +22,28 @@ import Game.Game;
 
 public class UI {
 	
+	public static boolean isEnglish;
+	
 	public UI() {
+		//creating frame
 		JFrame frame = new JFrame();
 		frame.getContentPane().setLayout(null);
+		frame.setSize(906, 935);
+		frame.setLocationRelativeTo(null);
+		frame.setTitle("Boggle by Team 12");
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		
+		//getting language
+		int option = JOptionPane.showOptionDialog(frame, "Please select your language.\nBitte wählen Sie Ihre Sprache.", "Language Select",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new String[] {"English", "Deutsch"}, null);
+		if (option == -1) {
+			System.exit(0);
+		} else if (option == 0){
+			isEnglish = true;
+		} else {
+			isEnglish = false;
+		}
 		
 		Game game = new Game(frame);
 		GameTimer timer = new GameTimer(180);
@@ -41,7 +61,12 @@ public class UI {
 		scrollPanel.getVerticalScrollBar().setUnitIncrement(40);
 
 		//creating score label
-		JLabel scoreLabel = new JLabel("<html><center>Score: 0<br><u>Latest Word</u><br>-</center></html>");
+		JLabel scoreLabel;
+		if (isEnglish) {
+			scoreLabel = new JLabel("<html><center>Score: 0<br><u>Latest Word</u><br>-</center></html>");
+		} else {
+			scoreLabel = new JLabel("<html><center>Ergebnis: 0<br><u>Letztes Wort</u><br>-</center></html>");
+		}
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.WHITE);
 		scoreLabel.setFont(new Font("Arial", Font.PLAIN, 50));
@@ -62,11 +87,19 @@ public class UI {
 					game.submitWord();
 				} else {
 					game.startGame();
-					button.setText("Submit");
+					if (isEnglish) {
+						button.setText("Submit");
+					} else {
+						button.setText("Einreichen");
+					}
 					timer.startTimer();
 				}
 				
-				scoreLabel.setText("<html><center>Score: "+game.getScore()+"<br><u>Latest Word</u><br>"+game.getLatestWord()+"</center></html>");
+				if (isEnglish) {
+					scoreLabel.setText("<html><center>Score: "+game.getScore()+"<br><u>Latest Word</u><br>"+game.getLatestWord()+"</center></html>");
+				} else {
+					scoreLabel.setText("<html><center>Ergebnis: "+game.getScore()+"<br><u>Letztes Wort</u><br>"+game.getLatestWord()+"</center></html>");
+				}
 				wordListLabel.setText(game.getFormattedList());
 			}
 		});
@@ -82,12 +115,7 @@ public class UI {
 		frame.getContentPane().add(scrollPanel);
 		frame.getContentPane().add(bottom);
 		
-		//changing properties of frame
-		frame.setSize(906, 935);
-		frame.setLocationRelativeTo(null);
-		frame.setTitle("Boggle by Team 12");
-		frame.setResizable(false);
-		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		//starting frame
 		frame.setVisible(true);
 	}
 
