@@ -23,7 +23,7 @@ public class Dictionary {
 
     // Reads the external dictionary text file and stores them in words list
     private void generateDictionary(){
-        InputStream in = UI.isEnglish ? Dictionary.class.getResourceAsStream("dictionary_en.txt") : Dictionary.class.getResourceAsStream("dictionary_de");
+        InputStream in = UI.isEnglish ? Dictionary.class.getResourceAsStream("dictionary_en.txt") : Dictionary.class.getResourceAsStream("dictionary_de.txt");
         try{
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String currentLine;
