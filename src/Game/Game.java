@@ -39,10 +39,10 @@ public class Game {
 
 			@Override
 			public void run() {
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 6; i++) {
 					board.randomize();
 					try {
-						Thread.sleep(25);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {}
 				}
 				
