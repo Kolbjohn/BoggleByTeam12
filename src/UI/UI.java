@@ -23,10 +23,12 @@ import Game.Game;
 public class UI {
 	
 	public static boolean isEnglish;
+	public static JFrame frame;
+	public static GameTimer timer;
 	
 	public UI() {
 		//creating frame
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.getContentPane().setLayout(null);
 		frame.setSize(906, 935);
 		frame.setLocationRelativeTo(null);
@@ -46,7 +48,7 @@ public class UI {
 		}
 		
 		Game game = new Game(frame);
-		GameTimer timer = new GameTimer(180);
+		timer = new GameTimer(180);
 		
 		//creating scrolling label
 		JLabel wordListLabel = new JLabel();
@@ -65,7 +67,7 @@ public class UI {
 		if (isEnglish) {
 			scoreLabel = new JLabel("<html><center>Score: 0<br><u>Latest Word</u><br>-</center></html>");
 		} else {
-			scoreLabel = new JLabel("<html><center>Ergebnis: 0<br><u>Letztes Wort</u><br>-</center></html>");
+			scoreLabel = new JLabel("<html><center>Punktzahl: 0<br><u>Letztes Wort</u><br>-</center></html>");
 		}
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.WHITE);
@@ -92,13 +94,12 @@ public class UI {
 					} else {
 						button.setText("Einreichen");
 					}
-					timer.startTimer();
 				}
 				
 				if (isEnglish) {
 					scoreLabel.setText("<html><center>Score: "+game.getScore()+"<br><u>Latest Word</u><br>"+game.getLatestWord()+"</center></html>");
 				} else {
-					scoreLabel.setText("<html><center>Ergebnis: "+game.getScore()+"<br><u>Letztes Wort</u><br>"+game.getLatestWord()+"</center></html>");
+					scoreLabel.setText("<html><center>Punktzahl: "+game.getScore()+"<br><u>Letztes Wort</u><br>"+game.getLatestWord()+"</center></html>");
 				}
 				wordListLabel.setText(game.getFormattedList());
 			}

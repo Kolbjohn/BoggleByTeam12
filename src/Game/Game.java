@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import Data.Board;
 import Data.Dictionary;
 
+import UI.UI;
+
 public class Game {
 	private static Board board;
 	private Dictionary dictionary;
@@ -33,7 +35,21 @@ public class Game {
 	}
 
 	private void animate() {
-		board.randomize();
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				for (int i = 0; i < 10; i++) {
+					board.randomize();
+					try {
+						Thread.sleep(25);
+					} catch (InterruptedException e) {}
+				}
+				
+				UI.timer.startTimer();
+			}
+			
+		}).start();
 	}
 
 	public String getFormattedList() {
@@ -49,7 +65,11 @@ public class Game {
 
 	public static void endGame() {
 		board.clearHighlights();
-		JOptionPane.showMessageDialog(null, "Game Over! Your score: " + score, "Game Over", JOptionPane.PLAIN_MESSAGE);
+		if (UI.isEnglish) {
+			JOptionPane.showMessageDialog(null, "Game Over! Your score: " + score, "Game Over", JOptionPane.PLAIN_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(null, "Spiel ist aus! Ihre Punktzahl: " + score, "Game Over", JOptionPane.PLAIN_MESSAGE);
+		}
 	}
 	
 	public void startGame() {
@@ -84,7 +104,7 @@ public class Game {
 							score += 11;
 							break;
 					}
-					this.wordList.add(currentWord);
+					this.wordList.add(0, currentWord);
 				}
 			}
 		}
@@ -97,6 +117,6 @@ public class Game {
 	}
 
 	public String getLatestWord(){
-		return wordList.size() < 1 ? "-" : wordList.get(wordList.size()-1);
+		return wordList.size() < 1 ? "-" : wordList.get(0);
 	}
 }
